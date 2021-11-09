@@ -1,0 +1,8 @@
+allow:
+    - net
+
+scripts:
+    dev:
+        cmd: mod.ts
+        watch: true
+        log: info
