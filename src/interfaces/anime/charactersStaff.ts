@@ -1,4 +1,3 @@
-import { CommonIdentifier } from "./../common.ts";
 import { BaseResponse } from "../common.ts";
 
 export interface CharactersStaff extends BaseResponse {
@@ -33,4 +32,11 @@ enum Language {
     Japanese = "Japanese",
     Korean = "Korean",
     Spanish = "Spanish",
+}
+
+interface CommonIdentifier {
+    mal_id: number;
+    name: string;
+    image_url: string;
+    url: string;
 }

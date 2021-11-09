@@ -1,6 +1,6 @@
-import { CommonIdentifier, BaseResponse } from "../common.ts";
+import { BaseResponse } from "../common.ts";
 
-export interface AnimeRequest extends BaseResponse {
+export interface AnimeResponse extends BaseResponse {
     aired: Aired;
     airing: boolean;
     background: string;
@@ -90,3 +90,10 @@ interface Producer extends CommonIdentifier {}
 interface Licensor extends CommonIdentifier {}
 interface Studio extends CommonIdentifier {}
 interface Theme extends CommonIdentifier {}
+
+interface CommonIdentifier {
+    mal_id: number;
+    name: string;
+    type: string;
+    url: string;
+}
