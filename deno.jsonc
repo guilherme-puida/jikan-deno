@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "strict": true
+    },
+    "lint": {
+        "rules": {
+            "exclude": ["camelcase", "no-empty-interface"]
+        }
+    },
+    "fmt": {
+        "files": {
+            "exclude": [
+                "LICENSE.md"
+            ]
+        },
+        "options": {
+            "lineWidth": 100,
+            "indentWidth": 4,
+            "singleQuote": true
+        }
+    }
+}
