@@ -1,4 +1,4 @@
-import { Anime } from "./src/api.ts";
+import { Anime } from './src/api.ts';
 
 const data = await Anime.getById(1);
 

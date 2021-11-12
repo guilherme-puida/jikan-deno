@@ -1,4 +1,4 @@
-import { BaseResponse } from "./../common.ts";
+import { BaseResponse } from './../common.ts';
 
 export interface Reviews extends BaseResponse {
     reviews: Review[];

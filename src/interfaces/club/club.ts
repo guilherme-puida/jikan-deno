@@ -1,4 +1,4 @@
-import { BaseResponse } from "./../common.ts";
+import { BaseResponse } from './../common.ts';
 
 export interface ClubResponse extends BaseResponse {
     anime_relations: Anime[];
@@ -40,8 +40,8 @@ interface Staff extends CommonIdentifier {
 }
 
 enum Type {
-    Anime = "anime",
-    Character = "character",
-    Manga = "manga",
-    Profile = "profile",
+    Anime = 'anime',
+    Character = 'character',
+    Manga = 'manga',
+    Profile = 'profile',
 }

@@ -1,4 +1,4 @@
-import { BaseResponse } from "./../common.ts";
+import { BaseResponse } from './../common.ts';
 
 export interface PersonResponse extends BaseResponse {
     about: string;
@@ -39,8 +39,8 @@ interface VoiceActingRole {
 }
 
 enum Role {
-    Main = "Main",
-    Supporting = "Supporting",
+    Main = 'Main',
+    Supporting = 'Supporting',
 }
 
 interface CommonIdentifier {

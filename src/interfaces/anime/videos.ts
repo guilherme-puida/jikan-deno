@@ -1,4 +1,4 @@
-import { BaseResponse } from "./../common.ts";
+import { BaseResponse } from './../common.ts';
 
 export interface Videos extends BaseResponse {
     episodes: Episode[];

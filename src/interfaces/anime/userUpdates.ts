@@ -1,4 +1,4 @@
-import { BaseResponse } from "./../common.ts";
+import { BaseResponse } from './../common.ts';
 export interface UserUpdates extends BaseResponse {
     users: User[];
 }
@@ -15,9 +15,9 @@ interface User {
 }
 
 enum Status {
-    Completed = "Completed",
-    Dropped = "Dropped",
-    OnHold = "On-Hold",
-    PlanToWatch = "Plan to Watch",
-    Watching = "Watching",
+    Completed = 'Completed',
+    Dropped = 'Dropped',
+    OnHold = 'On-Hold',
+    PlanToWatch = 'Plan to Watch',
+    Watching = 'Watching',
 }

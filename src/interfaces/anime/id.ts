@@ -1,4 +1,4 @@
-import { BaseResponse } from "../common.ts";
+import { BaseResponse } from '../common.ts';
 
 export interface AnimeResponse extends BaseResponse {
     aired: Aired;
@@ -40,9 +40,9 @@ export interface AnimeResponse extends BaseResponse {
 }
 
 export enum AiringStatus {
-    finished_airing = "Finished Airing",
-    currently_airing = "Currently Airing",
-    not_yet_aired = "Not yet aired",
+    finished_airing = 'Finished Airing',
+    currently_airing = 'Currently Airing',
+    not_yet_aired = 'Not yet aired',
 }
 
 interface Aired {
@@ -71,13 +71,13 @@ interface Genre extends CommonIdentifier {
 }
 
 enum Type {
-    Anime = "anime",
-    Manga = "manga",
+    Anime = 'anime',
+    Manga = 'manga',
 }
 
 interface Related {
     Adaptation: Array<Anime | Manga>;
-    "Side Story": Array<Anime | Manga>;
+    'Side Story': Array<Anime | Manga>;
     Summary: Array<Anime | Manga>;
 }
 
