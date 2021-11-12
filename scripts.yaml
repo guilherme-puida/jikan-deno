@@ -6,3 +6,6 @@ scripts:
         cmd: mod.ts
         watch: true
         log: info
+        check: true
+    build:
+        cmd: deno compile --allow-net --output ./build/jikan-api mod.ts
