@@ -3,9 +3,13 @@ allow:
 
 scripts:
     dev:
-        cmd: mod.ts
+        cmd: mod.ts --config deno.jsonc
         watch: true
         log: info
         check: true
     build:
-        cmd: deno compile --allow-net --output ./build/jikan-api mod.ts
+        cmd: deno compile --output ./build/jikan-api --config deno.jsonc mod.ts
+    fmt:
+        cmd: deno fmt --config deno.jsonc
+    cache:
+        cmd: deno cache -r mod.ts
