@@ -1,6 +1,6 @@
 import { Members } from './interfaces/club/members.ts';
 import { ClubResponse } from './interfaces/club/club.ts';
-import { ky, PQueue } from '../dep.ts';
+import { HTTPError, ky, PQueue } from '../dep.ts';
 import {
     AnimeResponse,
     CharactersStaff,
@@ -16,6 +16,15 @@ import {
 } from './interfaces/anime/anime.ts';
 import { CharacterResponse } from './interfaces/character/character.ts';
 import { Pictures } from './interfaces/pictures.ts';
+import { PersonResponse } from './interfaces/person/person.ts';
+import { logger } from './logger.ts';
+import {
+    AnimeListResponse,
+    FriendsResponse,
+    HistoryResponse,
+    MangaListResponse,
+    UserResponse,
+} from './interfaces/user/user.ts';
 
 const baseUrl = 'https://api.jikan.moe/v3';
 const queue = new PQueue({
@@ -25,14 +34,17 @@ const queue = new PQueue({
 const api = ky.create({
     hooks: {
         beforeRequest: [
-            (request: Request) =>
-                console.log(
-                    `Making request ${queue.pending} on url ${request.url}`,
-                ),
+            (request: Request) => {
+                logger.info(
+                    `Making request on url ${request.url}. ${queue.size} on queue, ${queue.pending} pending.`,
+                );
+            },
         ],
         afterResponse: [
             (_request, _options, response: Response) => {
-                console.log(`After response on url ${response.url}`);
+                logger.info(
+                    `Request finished on url ${response.url}. ${queue.size} on queue, ${queue.pending} pending`,
+                );
             },
         ],
     },
@@ -58,8 +70,18 @@ const api = ky.create({
 });
 
 async function makeRequest<T>(url: string): Promise<T> {
-    const response = await queue.add(() => api.get(url));
-    return response.json() as Promise<T>;
+    logger.info(`Added request on url ${baseUrl}/${url} to the queue.`);
+    let response;
+    try {
+        response = await queue.add(() => api.get(url));
+    } catch (e) {
+        if (e instanceof HTTPError) {
+            logger.error(`Status: ${e.response.status} on url ${e.request.url}`);
+            throw e;
+        }
+    }
+
+    return response?.json() as Promise<T>;
 }
 
 abstract class Anime {
@@ -139,4 +161,36 @@ abstract class Club {
     }
 }
 
-export { Anime, Character, Club };
+abstract class Person {
+    public static async getById(id: number): Promise<PersonResponse> {
+        return await makeRequest<PersonResponse>(`person/${id}`);
+    }
+
+    public static async getPictures(id: number): Promise<Pictures> {
+        return await makeRequest<Pictures>(`person/${id}/pictures`);
+    }
+}
+
+abstract class User {
+    public static async getProfile(username: string): Promise<UserResponse> {
+        return await makeRequest<UserResponse>(`user/${username}`);
+    }
+
+    public static async getHistory(username: string): Promise<HistoryResponse> {
+        return await makeRequest<HistoryResponse>(`user/${username}/history`);
+    }
+
+    public static async getFriends(username: string): Promise<FriendsResponse> {
+        return await makeRequest<FriendsResponse>(`user/${username}/friends`);
+    }
+
+    public static async getMangaList(username: string): Promise<MangaListResponse> {
+        return await makeRequest<MangaListResponse>(`user/${username}/mangalist`);
+    }
+
+    public static async getAnimeList(username: string): Promise<AnimeListResponse> {
+        return await makeRequest<AnimeListResponse>(`user/${username}/animelist`);
+    }
+}
+
+export { Anime, Character, Club, Person, User };

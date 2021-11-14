@@ -1,5 +1,3 @@
-import { Anime } from './src/api.ts';
+import * as Jikan from './src/api.ts';
 
-const data = await Anime.getById(1);
-
-console.log(data.aired.from.toDateString());
+export default Jikan;
