@@ -21,7 +21,7 @@ interface AnimeStats {
     watching: number;
     completed: number;
     oh_hold: number;
-    dropper: number;
+    dropped: number;
     plan_to_watch: number;
     total_entries: number;
     rewatched: number;
